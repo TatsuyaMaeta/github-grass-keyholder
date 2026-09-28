@@ -1,0 +1,13 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# 生成結果（個人のGitHubデータを含むため、コミットしない）
+out/
+*.3mf
+*.stl
+
+# OS / エディタ
+.DS_Store
+.vscode/

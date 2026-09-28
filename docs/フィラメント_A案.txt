@@ -1,0 +1,45 @@
+GitHub草キーホルダー フィラメント A案（GitHubの色に最も近い組み合わせ・Bambu Lab中心）
+調査日: 2026-09-28（価格・在庫はこの日時点）
+色差ΔEはCIEDE2000。GitHubの色はライトテーマの現行値、フィラメントの色はメーカー公表値。
+
+■ 組み合わせ
+
+[白] 天板・L0
+  フィラメント: Bambu Lab PLA マット アイボリーホワイト（11100）
+  公表色: #FFFFFF（GitHub L0 #eff2f5 とのΔE 3.3）
+  価格: ¥2,400（スプール無し）/ ¥2,900（スプール付き）・在庫あり
+  購入先: https://jp.store.bambulab.com/products/pla-matte-filament?id=45285577195812
+          https://www.amazon.co.jp/dp/B0CDGSZM75 （Amazon ¥2,700）
+
+[L1] GitHub #aceebb
+  フィラメント: Bambu Lab PLA マット アップルグリーン（11502）
+  公表色: #C2E189（ΔE 11.5・やや黄色寄り）
+  価格: ¥2,400・在庫あり
+  購入先: https://jp.store.bambulab.com/products/pla-matte-filament?id=50461341319460
+
+[L2] GitHub #4ac26b
+  フィラメント: Bambu Lab PLA マット グラスグリーン（11500）
+  公表色: #61C680（ΔE 3.6）
+  価格: ¥2,400 / ¥2,900・公式ストアは在庫切れ
+  購入先: https://jp.store.bambulab.com/products/pla-matte-filament?id=47482732347684
+
+[L3] GitHub #2da44e
+  フィラメント: Bambu Lab PLA ベーシック Bambuグリーン（10501）
+  公表色: #00AE42（ΔE 3.9・この色だけ光沢）
+  価格: ¥2,400 / ¥2,900・在庫あり
+  購入先: https://jp.store.bambulab.com/products/pla-basic-filament?id=48531491750180
+
+[L4] GitHub #116329
+  フィラメント: Polymaker パンクロマ Matte エメラルドグリーン
+  公表色: #22624F（ΔE 11.3・やや青寄り）
+  価格: Amazon ¥5,384・在庫あり
+  購入先: https://www.amazon.co.jp/dp/B0FXLWLJD5
+
+■ この組み合わせの特徴
+- 明るさがL1→L4の順に下がり（L* 86 → 73 → 62 → 37）、GitHubと同じ見え方になる
+- 隣り合うレベルの色差: L1-L2 15.1 / L2-L3 10.5 / L3-L4 30.7（4色とも見分けられる）
+
+■ 注意点
+- L2のグラスグリーンは公式ストアで在庫切れ。他の販売店でも在庫は確認できていない
+- 公表色と実物はずれる（グラスグリーンは実測でΔE 6程度）。購入後に試し印刷で並べて確認する
+- 天板の白0.8mmは下の緑が透けるおそれがある。白の層を厚くする（1.2〜1.6mm）ことを検討する

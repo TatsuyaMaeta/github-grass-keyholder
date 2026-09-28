@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GitHub草キーホルダー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside id="side">
+    <section>
+      <h2>1. データ</h2>
+      <div class="row">
+        <input id="user" type="text" placeholder="GitHub ユーザー名" autocomplete="off" spellcheck="false">
+        <button id="btn-fetch" class="primary">取得</button>
+      </div>
+      <div class="field">
+        <label for="start-date">開始週（日曜、省略可）</label>
+        <input id="start-date" type="date">
+      </div>
+      <button id="btn-start-date-reset" class="link" type="button">既定に戻す</button>
+      <p class="note">省略すると取得した日を基準にした直近54週になり、取得タイミングで結果がずれます。固定するには開始週（日曜）を指定してください。</p>
+      <div class="row small">
+        <button id="btn-json">JSON を読み込む</button>
+        <button id="btn-demo">デモデータ</button>
+      </div>
+      <p id="token-status" class="note"></p>
+      <details id="token-box">
+        <summary>トークンをキーチェーンに保存</summary>
+        <div class="row">
+          <input id="token" type="password" placeholder="ghp_… / github_pat_…" autocomplete="off">
+          <button id="btn-token-save">保存</button>
+        </div>
+        <button id="btn-token-delete" class="link">保存したトークンを削除</button>
+      </details>
+      <div id="data-summary" hidden>
+        <p id="data-total" class="note"></p>
+        <div id="grids"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 寸法</h2>
+      <div id="fields"></div>
+    </section>
+
+    <section>
+      <h2>3. 色（プレビュー・3MF 用）</h2>
+      <div id="colors"></div>
+      <div class="row small">
+        <button id="btn-colors-filament">フィラメント A 案</button>
+        <button id="btn-colors-github">GitHub の色</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 書き出し</h2>
+      <button id="btn-export" class="primary wide" disabled>STL / 3MF を書き出す…</button>
+      <div id="export-result" hidden>
+        <p id="export-dir" class="note"></p>
+        <div class="row small">
+          <button id="btn-open-folder">Finder で開く</button>
+          <button id="btn-open-slicer">スライサーで開く</button>
+        </div>
+      </div>
+      <button id="btn-coupons" class="wide">はめ込みテスト片を書き出す…</button>
+      <p class="note">すき間 0.10 / 0.15 / 0.20mm の 3×3 マスの小片（白＋L1）です。</p>
+      <div class="row small">
+        <button id="btn-preset-save">設定を保存…</button>
+        <button id="btn-preset-load">設定を読み込む…</button>
+      </div>
+    </section>
+  </aside>
+
+  <main>
+    <div id="toolbar">
+      <div class="seg" id="seg-plate"></div>
+      <div class="seg" id="seg-view">
+        <button data-view="assembled" class="on">組み立て</button>
+        <button data-view="exploded">分解</button>
+        <button data-view="single">単体</button>
+      </div>
+      <div class="seg" id="seg-layer" hidden></div>
+      <div class="spacer"></div>
+      <div class="seg">
+        <button id="btn-cam-top">上から</button>
+        <button id="btn-cam-iso">斜め</button>
+        <button id="btn-cam-bottom">裏から</button>
+      </div>
+    </div>
+    <div id="viewport">
+      <canvas id="canvas"></canvas>
+      <div id="empty">ユーザー名を入れて「取得」するか、デモデータで試してください</div>
+      <div id="busy" hidden><span class="spinner"></span>生成中…</div>
+    </div>
+    <div id="infobar">
+      <div id="dims"></div>
+      <ul id="warnings"></ul>
+      <p id="error" hidden></p>
+    </div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
