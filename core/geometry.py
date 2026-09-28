@@ -140,15 +140,21 @@ def build_plate(cells, cols, rows, p: Params, back_text="", with_ring=True, name
             solid += CrossSection(pins[lv]).extrude(pin_top_for(lv) - layer_top).translate((0, 0, layer_top))
         layers[lname] = solid
 
-    # 各層の裏に組み立て順のマーク（例: 2番目に重ねる L1 なら "2L1"）を刻印。5層あると組み立て順がわからなくなるため
+    # 各層の裏に、レベル番号と同じ本数の識別スリットを彫る（L4なら4本、L2なら2本、白は0本で無地）。
+    # 5層あると組み立て順がわからなくなるため。文字は読みにくいので本数（tally状のスリット）にした
     if p.mark_depth > 0:
-        for i, lname in enumerate(names):
-            label = f"{i + 1}{'W' if lname == 'white' else lname}"
-            mk = text_section(label, p.mark_h)  # 原点合わせ済み: (0,0)〜(幅, mark_h)
-            mk_w = mk.bounds()[2]
-            mk = mk.translate((0, -bottom_margin + p.mark_pad))  # マージン帯の中で上下均等に余白を取る
-            mk = mk.mirror((1, 0)).translate((2.0 + mk_w, 0))  # 裏から見て読めるよう左右反転
-            layers[lname] -= mk.extrude(p.mark_depth + 0.01).translate((0, 0, z0[lname] - 0.01))
+        slit_r = min(0.3, p.mark_slit_w / 2 - 0.01)
+        y0 = -bottom_margin + p.mark_pad
+        for lname in names:
+            count = 0 if lname == "white" else int(lname[1:])
+            if count == 0:
+                continue
+            slits = None
+            for k in range(count):
+                x = 2.0 + k * (p.mark_slit_w + p.mark_slit_gap)
+                rect = rounded_rect(p.mark_slit_w, p.mark_h, slit_r).translate((x, y0))
+                slits = rect if slits is None else slits + rect
+            layers[lname] -= slits.extrude(p.mark_depth + 0.01).translate((0, 0, z0[lname] - 0.01))
 
     # 月が変わる列の上に月名をくり抜く（白の天板のみ、上の余白帯）
     if p.show_months and month_labels:

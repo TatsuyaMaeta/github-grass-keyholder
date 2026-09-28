@@ -45,9 +45,11 @@ class Params:
     back_text: str = field(default="", metadata=dict(label="刻印の文字（空欄＝ユーザー名）", group="刻印", unit=""))
     text_h: float = _f(8.0, "文字の高さ", "刻印", lo=2.0, hi=20.0, step=0.5)
     text_depth: float = _f(0.6, "刻印の深さ", "刻印", lo=0.2, hi=3.0)
-    mark_depth: float = _f(0.2, "組み立て順マーク（各層の裏）の深さ。0で無効", "刻印", lo=0.0, hi=1.0, step=0.05)
-    mark_h: float = _f(2.5, "組み立て順マークの高さ", "刻印", lo=1.0, hi=6.0, step=0.1)
-    mark_pad: float = _f(0.375, "組み立て順マーク上下の余白", "刻印", lo=0.2, hi=3.0, step=0.025)
+    mark_depth: float = _f(0.5, "識別スリット（各層の裏、本数でレベルを表す）の深さ。0で無効", "刻印", lo=0.0, hi=1.0, step=0.05)
+    mark_h: float = _f(2.5, "識別スリットの高さ", "刻印", lo=1.0, hi=6.0, step=0.1)
+    mark_pad: float = _f(0.375, "識別スリット上下の余白", "刻印", lo=0.2, hi=3.0, step=0.025)
+    mark_slit_w: float = _f(1.0, "識別スリット1本の幅", "刻印", lo=0.4, hi=3.0, step=0.1)
+    mark_slit_gap: float = _f(1.0, "識別スリットどうしの間隔", "刻印", lo=0.4, hi=3.0, step=0.1)
     colors: dict = field(default_factory=lambda: dict(DEFAULT_COLORS), metadata=dict(label="層の色", group="色", unit=""))
 
     def to_dict(self):
@@ -79,7 +81,7 @@ def errors(p: Params):
     if p.text_depth >= p.bottom_t:
         errs.append("刻印の深さは最下層の厚さより小さくしてください")
     if p.mark_depth >= min(p.layer_t, p.bottom_t):
-        errs.append("組み立て順マークの深さは層の厚さより小さくしてください")
+        errs.append("識別スリットの深さは層の厚さより小さくしてください")
     if 2 * p.clearance >= p.cell:
         errs.append("すき間が大きすぎて突起が作れません")
     return errs
